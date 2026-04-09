@@ -1,5 +1,4 @@
 import requests
-import json
 
 def emotion_detector(text_to_analyze):
 
@@ -15,6 +14,8 @@ def emotion_detector(text_to_analyze):
         }
     }
 
-    response = requests.post(url, json=input_json, headers=headers)
+    try:
+        response = requests.post(url, json=input_json, headers=headers, timeout=5)
 
-    return response.text
+        print("STATUS:", response.status_code)
+        print("TEXT:", response.text)
