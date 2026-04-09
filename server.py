@@ -10,14 +10,14 @@ def home():
 @app.route("/emotionDetector")
 def detect_emotion():
     text_to_analyze = request.args.get('text')
-
-    if not text_to_analyze:
-        return "No text provided"
+    print("Received text:", text_to_analyze)
 
     try:
         result = emotion_detector(text_to_analyze)
-        return str(result)   # 👈 important
+        print("Result:", result)
+        return str(result)
     except Exception as e:
+        print("ERROR:", e)
         return f"Error: {str(e)}"
 
 if __name__ == "__main__":
