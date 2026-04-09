@@ -19,3 +19,9 @@ def emotion_detector(text_to_analyze):
 
         print("STATUS:", response.status_code)
         print("TEXT:", response.text)
+
+        return response.text
+
+    except Exception as e:
+        print("API ERROR:", e)
+        return f"API Error: {str(e)}"
