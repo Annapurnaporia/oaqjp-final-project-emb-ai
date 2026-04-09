@@ -7,11 +7,18 @@ app = Flask(__name__)
 def home():
     return "Server is working"
 
-@app.route("/emotionDetector", methods=["GET"])
+@app.route("/emotionDetector")
 def detect_emotion():
     text_to_analyze = request.args.get('text')
-    result = emotion_detector(text_to_analyze)
-    return result
+
+    if not text_to_analyze:
+        return "No text provided"
+
+    try:
+        result = emotion_detector(text_to_analyze)
+        return str(result)   # 👈 important
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 if __name__ == "__main__":
     app.run(debug=True)
